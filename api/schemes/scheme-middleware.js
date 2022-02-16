@@ -7,7 +7,11 @@
   }
 */
 const checkSchemeId = (req, res, next) => {
-
+  if(!req.params.id) {
+    res.status(404).json({message: `scheme with scheme_id ${req.params.id} not found`})
+  } else {
+    next();
+  }
 }
 
 /*
@@ -19,7 +23,11 @@ const checkSchemeId = (req, res, next) => {
   }
 */
 const validateScheme = (req, res, next) => {
-
+  if (!req.body.scheme_name || !req.body.scheme_name.trim() || typeof req.body.scheme_name !== 'string') {
+    res.status(400).json({ message: 'invalid scheme_name'})
+  } else {
+    next();
+  }
 }
 
 /*
@@ -32,7 +40,12 @@ const validateScheme = (req, res, next) => {
   }
 */
 const validateStep = (req, res, next) => {
-
+  const { instructions, step_number } = req.body
+  if (!instructions || !instructions.trim() || typeof instructions !== 'string' || typeof step_number !== 'number' || step_number < 1) {
+    res.status(400).json({ message: 'invalid step'})
+  } else {
+    next();
+  }
 }
 
 module.exports = {
