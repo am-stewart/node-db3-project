@@ -53,16 +53,13 @@ async function findSteps(scheme_id) {
   return result;
 }
 
-async function add(scheme) { // EXERCISE D
+async function add(scheme) {
   const [scheme_id] = await db('schemes').insert(scheme);
     return findById(scheme_id)
-  /*
-    1D- This function creates a new scheme and resolves to _the newly created scheme_.
-  */
 }
 
 async function addStep(scheme_id, step) { // EXERCISE E
-  await db('steps').insert(step)
+  await db('steps').insert({...step, scheme_id}).where({scheme_id})
     return findSteps(scheme_id)
 
   /*
