@@ -53,7 +53,7 @@ async function findSteps(scheme_id) {
   return result;
 }
 
-async function add(scheme) { // EXERCISE D STILL NEEDS WORK
+async function add(scheme) { // EXERCISE D
   const [scheme_id] = await db('schemes').insert(scheme);
     return findById(scheme_id)
   /*
